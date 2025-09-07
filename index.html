@@ -181,11 +181,12 @@ input:focus, textarea:focus{
   li{ padding:8px 8px 8px 32px; }
   .button{ padding:10px 16px; border-radius:8px; }
 
-  /* Мобильная подсветка активного блока */
-  .section.active{
+  /* Мобильная плавная подсветка */
+  .section.active, .intro.active{
     background: rgba(107,76,59,0.12);
-    box-shadow:0 12px 28px rgba(0,0,0,0.12);
-    transform:translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+    transform: translateY(-4px);
+    transition: background 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
   }
 }
 
@@ -200,6 +201,7 @@ input:focus, textarea:focus{
 <div class="container">
   <button class="lang-switch" onclick="switchLang()">EN</button>
 
+  <!-- Русская версия -->
   <div id="ru" class="lang-block active">
     <h1>Привет! Я Антон Терещук</h1>
     <div class="intro">
@@ -249,6 +251,7 @@ input:focus, textarea:focus{
     </div>
   </div>
 
+  <!-- Английская версия -->
   <div id="en" class="lang-block">
     <h1>Hello! I'm Anton Tereshchuk</h1>
     <div class="intro">
@@ -297,6 +300,7 @@ input:focus, textarea:focus{
       </form>
     </div>
   </div>
+
 </div>
 
 <script>
@@ -322,17 +326,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const ru = document.getElementById('ru');
   btn.textContent = ru.classList.contains('active') ? "EN" : "RU";
 
-  // Мобильная подсветка активного блока
-  const sections = document.querySelectorAll('.section');
+  // Мобильная плавная подсветка активного блока
+  const sections = document.querySelectorAll('.intro, .section'); 
   if(window.innerWidth <= 768){
+    let timeout;
     const observerMobile = new IntersectionObserver(entries=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting){
-          sections.forEach(s=>s.classList.remove('active'));
-          entry.target.classList.add('active');
-        }
-      });
-    }, { threshold:0.6 });
+      clearTimeout(timeout);
+      timeout = setTimeout(()=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            sections.forEach(s=>s.classList.remove('active'));
+            entry.target.classList.add('active');
+          }
+        });
+      }, 50);
+    }, { threshold:0.35, rootMargin:"-10% 0px -10% 0px" });
     sections.forEach(s=>observerMobile.observe(s));
   }
 });
