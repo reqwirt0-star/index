@@ -181,8 +181,8 @@ input:focus, textarea:focus{
   li{ padding:8px 8px 8px 32px; }
   .button{ padding:10px 16px; border-radius:8px; }
 
-  /* Мобильная плавная подсветка */
-  .section.active, .intro.active{
+  /* Мобильная плавная подсветка только для .section */
+  .section.active{
     background: rgba(107,76,59,0.12);
     box-shadow: 0 12px 28px rgba(0,0,0,0.12);
     transform: translateY(-4px);
@@ -326,22 +326,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const ru = document.getElementById('ru');
   btn.textContent = ru.classList.contains('active') ? "EN" : "RU";
 
-  // Мобильная плавная подсветка активного блока
-  const sections = document.querySelectorAll('.intro, .section'); 
+  // Мобильная плавная подсветка активного блока (только секции)
+  const mobileSections = document.querySelectorAll('.section'); 
   if(window.innerWidth <= 768){
     let timeout;
     const observerMobile = new IntersectionObserver(entries=>{
       clearTimeout(timeout);
       timeout = setTimeout(()=>{
-        entries.forEach(entry=>{
-          if(entry.isIntersecting){
-            sections.forEach(s=>s.classList.remove('active'));
-            entry.target.classList.add('active');
-          }
+        let centerY = window.innerHeight / 2;
+        let closest = null;
+        let minDist = Infinity;
+        mobileSections.forEach(section => {
+          const rect = section.getBoundingClientRect();
+          const sectionCenter = rect.top + rect.height /2;
+          const dist = Math.abs(centerY - sectionCenter);
+          if(dist < minDist){ minDist = dist; closest = section; }
         });
-      }, 50);
-    }, { threshold:0.35, rootMargin:"-10% 0px -10% 0px" });
-    sections.forEach(s=>observerMobile.observe(s));
+        mobileSections.forEach(s => s.classList.remove('active'));
+        if(closest) closest.classList.add('active');
+      },50);
+    }, { threshold:0.5 });
+    mobileSections.forEach(s => observerMobile.observe(s));
   }
 });
 </script>
