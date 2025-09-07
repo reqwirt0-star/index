@@ -1,263 +1,360 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Антон Терещук - Резюме</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Антон Терещук — Резюме</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #f8f8f8;
-      margin: 0;
-      padding: 0;
-      color: #333333;
+    :root{
+      --page-bg: #f8f8f8;
+      --text: #333333;
+      --accent: #6B4C3B;   /* основной тёмно-коричневый */
+      --accent-soft: #D2B48C; /* песочный акцент */
+      --card-bg: #ffffff;
+      --intro-bg: #FFFDF6; /* мягкий фон для интро */
     }
 
-    .container {
-      max-width: 900px;
-      margin: 30px auto;
-      padding: 20px;
-      position: relative;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:'Poppins',system-ui,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--page-bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
     }
 
-    /* Кнопка переключения языка */
-    .lang-switch {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 999;
-      background-color: #6B4C3B;
-      color: #fff;
+    .container{
+      max-width:920px;
+      margin:34px auto;
+      padding:22px;
+      position:relative;
+    }
+
+    /* фиксированная кнопка выбора языка */
+    .lang-switch{
+      position:fixed;
+      top:18px;
+      right:18px;
+      z-index:1200;
+      background-color:var(--accent);
+      color:#fff;
       border: none;
-      border-radius: 8px;
-      padding: 10px 18px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      border-radius:10px;
+      padding:10px 16px;
+      font-weight:600;
+      cursor:pointer;
+      box-shadow:0 6px 18px rgba(0,0,0,0.12);
+      transition:transform .18s ease, background .18s ease, box-shadow .18s ease;
     }
-    .lang-switch:hover {
-      background-color: #D2B48C;
-      color: #333333;
-      transform: scale(1.05);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
-    }
-
-    /* Первый блок "Обо мне" */
-    .intro {
-      background: #FFFDF6;
-      border-radius: 20px;
-      padding: 30px 35px;
-      margin-bottom: 30px;
-      text-align: center;
-      font-size: 18px;
-      line-height: 1.7;
-      font-weight: 500;
-      color: #6B4C3B;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-      transform: translateY(-20px);
-      opacity: 0;
-      transition: all 0.8s ease;
-    }
-    .intro.visible { transform: translateY(0); opacity: 1; }
-    .intro span.highlight { color: #D2B48C; font-weight: 600; }
-
-    /* Секции */
-    .section {
-      background: #ffffff;
-      border-radius: 16px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-      padding: 25px 30px;
-      margin-bottom: 25px;
-      transform: translateY(30px);
-      opacity: 0;
-      transition: all 0.6s ease, transform 0.4s;
-    }
-    .section:hover { transform: translateY(0) scale(1.02); box-shadow: 0 10px 25px rgba(0,0,0,0.12); }
-    .section.visible { transform: translateY(0); opacity: 1; }
-
-    h1 { color: #333333; text-align: center; margin-bottom: 15px; }
-    h2 {
-      color: #6B4C3B;
-      margin-bottom: 12px;
-      border-bottom: 2px solid #D2B48C;
-      display: inline-block;
-      padding-bottom: 4px;
+    .lang-switch:hover{
+      background-color:var(--accent-soft);
+      color:var(--text);
+      transform:scale(1.04);
+      box-shadow:0 10px 28px rgba(0,0,0,0.18);
     }
 
-    ul { list-style: none; padding-left: 0; }
-    li {
-      margin-bottom: 10px;
-      padding-left: 28px;
-      position: relative;
-      transition: transform 0.2s;
+    /* Заголовок страницы (имя) */
+    h1{
+      text-align:center;
+      margin:0 0 10px 0;
+      font-size:28px;
+      color:var(--text);
     }
-    li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: #D2B48C;
+
+    /* Интро-блок (выделенный) */
+    .intro{
+      background:var(--intro-bg);
+      border-radius:16px;
+      padding:26px 28px;
+      margin-bottom:22px;
+      text-align:center;
+      font-size:17px;
+      font-weight:500;
+      color:var(--accent);
+      box-shadow:0 8px 24px rgba(0,0,0,0.06);
+      transform:translateY(-12px);
+      opacity:0;
+      transition:transform .6s ease, opacity .6s ease;
     }
-    li:hover { transform: translateX(5px); }
+    .intro.visible{ transform:translateY(0); opacity:1; }
+    .intro .highlight{ color:var(--accent-soft); font-weight:600; }
 
-    form label { font-weight: 600; display: block; margin-top: 10px; }
-    input, textarea {
-      width: 100%; padding: 12px; margin-top: 5px;
-      border-radius: 8px; border: 1px solid #ccc; font-size: 14px;
-      box-sizing: border-box;
-      transition: border-color 0.3s, box-shadow 0.3s;
+    /* Общие секции */
+    .section{
+      background:var(--card-bg);
+      border-radius:12px;
+      padding:22px;
+      margin-bottom:20px;
+      box-shadow:0 8px 20px rgba(0,0,0,0.06);
+      transform:translateY(20px);
+      opacity:0;
+      transition:transform .5s ease, opacity .5s ease, box-shadow .25s ease, background .2s ease;
     }
-    input:focus, textarea:focus { border-color: #D2B48C; outline: none; box-shadow: 0 0 8px rgba(210,180,140,0.3);}
-    textarea { resize: vertical; min-height: 80px; }
-    .button {
-      display: inline-block; padding: 12px 28px; background-color: #6B4C3B; color: #fff;
-      text-decoration: none; border-radius: 8px; margin-top: 12px; font-weight: 600;
-      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    .section.visible{ transform:translateY(0); opacity:1; }
+    .section:hover{
+      transform:translateY(-6px);
+      box-shadow:0 16px 36px rgba(0,0,0,0.12);
+      background:#fffaf6;
     }
-    .button:hover { background-color: #D2B48C; color: #333333; transform: scale(1.05); box-shadow: 0 6px 18px rgba(0,0,0,0.25); }
 
-    /* Двуязычные блоки */
-    .lang-block { display: none; }
-    .lang-block.active { display: block; }
+    h2{
+      margin:0 0 10px 0;
+      color:var(--accent);
+      display:inline-block;
+      padding-bottom:6px;
+      border-bottom:2px solid rgba(210,180,140,0.25);
+      font-size:18px;
+    }
 
-    /* Иконки навыков */
-    .skill-icon { margin-right: 8px; color: #D2B48C; transition: transform 0.2s; }
-    li:hover .skill-icon { transform: scale(1.2); }
+    ul{ list-style:none; padding-left:0; margin:0; }
+    li{
+      padding:10px 12px 10px 34px;
+      margin-bottom:10px;
+      position:relative;
+      border-radius:8px;
+      transition:transform .22s ease, background .22s ease;
+    }
+    li::before{
+      content:"";
+      position:absolute;
+      left:12px;
+      top:50%;
+      transform:translateY(-50%);
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:var(--accent-soft);
+    }
+    li:hover{ transform:translateX(6px); background:rgba(210,180,140,0.08); }
+    .skill-icon{ margin-right:8px; display:inline-block; color:var(--accent-soft); transition:transform .22s ease, color .22s ease; }
+    li:hover .skill-icon{ transform:scale(1.18) rotate(6deg); color:var(--accent); }
 
-    @media(max-width: 600px){ .container { padding: 15px; } }
+    /* Контактная форма минимально стилизована */
+    form label{ display:block; margin-top:10px; font-weight:600; color:var(--text); }
+    input, textarea{
+      width:100%;
+      padding:10px 12px;
+      margin-top:6px;
+      border-radius:8px;
+      border:1px solid #d9d9d9;
+      font-size:14px;
+      transition:box-shadow .18s ease, border-color .18s ease, transform .12s ease;
+    }
+    input:focus, textarea:focus{
+      outline:none;
+      border-color:var(--accent-soft);
+      box-shadow:0 6px 18px rgba(210,180,140,0.12);
+      transform:translateY(-1px);
+    }
+
+    .button{
+      display:inline-block;
+      margin-top:12px;
+      padding:11px 20px;
+      background:var(--accent);
+      color:#fff;
+      border-radius:9px;
+      text-decoration:none;
+      font-weight:600;
+      transition:transform .15s ease, background .15s ease, box-shadow .15s ease;
+    }
+    .button:hover{
+      background:var(--accent-soft);
+      color:var(--text);
+      transform:scale(1.03);
+      box-shadow:0 8px 22px rgba(0,0,0,0.12);
+    }
+
+    /* Блоки для языков — только один видимый */
+    .lang-block{ display:none; }
+    .lang-block.active{ display:block; }
+
+    /* --- Адаптив --- */
+    @media (max-width:900px){
+      .container{ padding:18px; }
+      h1{ font-size:24px; }
+      .intro{ font-size:16px; padding:20px; margin-bottom:18px; border-radius:14px; }
+      .section{ padding:18px; border-radius:12px; }
+    }
+
+    @media (max-width:600px){
+      .container{ padding:12px; margin:18px auto; }
+      .lang-switch{ top:12px; right:12px; padding:8px 12px; border-radius:8px; font-size:13px; }
+      h1{ font-size:20px; margin-bottom:8px; }
+      .intro{ font-size:15px; padding:16px; }
+      .section{ padding:14px; margin-bottom:14px; }
+      li{ padding:8px 8px 8px 32px; }
+      .button{ padding:10px 16px; border-radius:8px; }
+    }
+
+    /* small tweak for very narrow phones */
+    @media (max-width:380px){
+      .intro{ font-size:14px; }
+      h1{ font-size:18px; }
+      .lang-switch{ padding:7px 10px; font-size:12px; }
+    }
   </style>
 </head>
 <body>
-<div class="container">
-  <button class="lang-switch" onclick="switchLang()">EN</button>
+  <div class="container">
+    <button class="lang-switch" onclick="switchLang()">EN</button>
 
-  <!-- Русская версия -->
-  <div id="ru" class="lang-block active">
-    <h1>Привет! Я Антон Терещук</h1>
-    <div class="intro">
-      <p>Я <span class="highlight">начинающий специалист</span> с опытом работы в <span class="highlight">маркетплейсах</span> и <span class="highlight">коммуникациях</span>, стремлюсь развиваться в сфере <span class="highlight">контент-менеджмента</span> и <span class="highlight">рекрутинга</span>. Коммуникабельный, внимательный к деталям, всегда готов учиться и решать новые задачи.</p>
+    <!-- RUSSIAN -->
+    <div id="ru" class="lang-block active">
+      <h1>Привет! Я Антон Терещук</h1>
+
+      <div class="intro">
+        Я <span class="highlight">начинающий специалист</span> с опытом работы в <span class="highlight">маркетплейсах</span> и <span class="highlight">коммуникациях</span>. Стремлюсь развиваться в сфере <span class="highlight">контент-менеджмента</span> и <span class="highlight">рекрутинга</span>. Коммуникабельный, внимательный к деталям, всегда готов учиться и решать новые задачи.
+      </div>
+
+      <div class="section">
+        <h2>Навыки</h2>
+        <ul>
+          <li><span class="skill-icon">💻</span>Базовые навыки ПК (MS Office, Google Docs)</li>
+          <li><span class="skill-icon">🗣</span>Умение вести деловые беседы</li>
+          <li><span class="skill-icon">🔍</span>Эффективный поиск и анализ информации</li>
+          <li><span class="skill-icon">🌐</span>Языки: Украинский (родной), Русский (свободно), Английский (в процессе изучения)</li>
+          <li><span class="skill-icon">⚡</span>Ответственность, внимательность, высокая мотивация</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Образование</h2>
+        <p><strong>Колледж:</strong> Компьютерные науки, 3-й год, экстернат (2022 — настоящее время)</p>
+        <p><strong>Средняя школа:</strong> 2013 — 2022</p>
+      </div>
+
+      <div class="section">
+        <h2>Опыт работы</h2>
+        <ul>
+          <li><span class="skill-icon">🛒</span><strong>Контент-менеджер маркетплейса (Украина)</strong>: создавал карточки товаров, подбирал фото, серийные номера, спецификации, оформлял и улучшал карточки, создавал AI-визуалы.</li>
+          <li><span class="skill-icon">🌐</span><strong>Контент-менеджер / агент (Facebook Marketplace, США)</strong>: находил клиентов для строительной компании в Техасе, вел переписку и передавал лиды менеджеру через переводчик.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Контакты</h2>
+        <p>Телефон: +420 777 264 569</p>
+        <p>Email: reqwirt0@gmail.com</p>
+        <p>Локация: Карвина, Чехия</p>
+
+        <form>
+          <label>Имя</label>
+          <input type="text" placeholder="Ваше имя">
+          <label>Email</label>
+          <input type="email" placeholder="Ваш email">
+          <label>Сообщение</label>
+          <textarea placeholder="Ваше сообщение"></textarea>
+          <a href="#" class="button">Отправить</a>
+        </form>
+      </div>
     </div>
 
-    <div class="section">
-      <h2>Навыки</h2>
-      <ul>
-        <li><span class="skill-icon">💻</span> Базовые навыки ПК (MS Office, Google Docs)</li>
-        <li><span class="skill-icon">🗣</span> Умение вести деловые беседы</li>
-        <li><span class="skill-icon">🔍</span> Эффективный поиск и анализ информации</li>
-        <li><span class="skill-icon">🌐</span> Языки: Украинский (родной), Русский (свободно), Английский (в процессе изучения)</li>
-        <li><span class="skill-icon">⚡</span> Ответственность, внимательность, высокая мотивация</li>
-      </ul>
+    <!-- ENGLISH -->
+    <div id="en" class="lang-block">
+      <h1>Hello! I'm Anton Tereshchuk</h1>
+
+      <div class="intro">
+        I am an <span class="highlight">entry-level specialist</span> with experience in <span class="highlight">marketplaces</span> and <span class="highlight">communications</span>. I aim to grow in <span class="highlight">content management</span> and <span class="highlight">recruitment</span>. Communicative, detail-oriented, quick to learn and ready for new tasks.
+      </div>
+
+      <div class="section">
+        <h2>Skills</h2>
+        <ul>
+          <li><span class="skill-icon">💻</span>Basic computer skills (MS Office, Google Docs)</li>
+          <li><span class="skill-icon">🗣</span>Professional communication</li>
+          <li><span class="skill-icon">🔍</span>Research and analysis</li>
+          <li><span class="skill-icon">🌐</span>Languages: Ukrainian (native), Russian (fluent), English (learning)</li>
+          <li><span class="skill-icon">⚡</span>Responsibility, attention to detail, high motivation</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Education</h2>
+        <p><strong>College:</strong> Computer Science, 3rd year, externship (2022 — present)</p>
+        <p><strong>High School:</strong> 2013 — 2022</p>
+      </div>
+
+      <div class="section">
+        <h2>Work Experience</h2>
+        <ul>
+          <li><span class="skill-icon">🛒</span><strong>Marketplace Content Manager (Ukraine)</strong>: created product cards, selected photos/specs, designed AI visuals and optimized listings.</li>
+          <li><span class="skill-icon">🌐</span><strong>Content Manager / Agent (Facebook Marketplace, USA)</strong>: found clients for a Texas construction company, handled chats and passed leads to manager via translator.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Contacts</h2>
+        <p>Phone: +420 777 264 569</p>
+        <p>Email: reqwirt0@gmail.com</p>
+        <p>Location: Karvina, Czech Republic</p>
+
+        <form>
+          <label>Name</label>
+          <input type="text" placeholder="Your Name">
+          <label>Email</label>
+          <input type="email" placeholder="Your Email">
+          <label>Message</label>
+          <textarea placeholder="Your Message"></textarea>
+          <a href="#" class="button">Send</a>
+        </form>
+      </div>
     </div>
 
-    <div class="section">
-      <h2>Образование</h2>
-      <p><strong>Колледж:</strong> Компьютерные науки, 3-й год, экстернат (2022 — настоящее время)</p>
-      <p><strong>Средняя школа:</strong> 2013 — 2022</p>
-    </div>
-
-    <div class="section">
-      <h2>Опыт работы</h2>
-      <ul>
-        <li><span class="skill-icon">🛒</span><strong>Контент-менеджер маркетплейса (Украина)</strong>: Создавал карточки товаров на Prom, Rozetka, Epicentr. Подбирал фото, серийные номера, спецификации, создавал привлекательные изображения с помощью AI.</li>
-        <li><span class="skill-icon">🌐</span><strong>Контент-менеджер / агент (Facebook Marketplace, США)</strong>: Вёл коммуникацию с клиентами от лица строительной компании в Техасе. Находил клиентов и передавал менеджеру для переговоров через переводчик.</li>
-      </ul>
-    </div>
-
-    <div class="section">
-      <h2>Контакты</h2>
-      <p>Телефон: +420 777 264 569</p>
-      <p>Email: reqwirt0@gmail.com</p>
-      <p>Локация: Карвина, Чехия</p>
-      <p>Доступен для удалённой работы, гибкий график, готов к новым задачам.</p>
-
-      <form>
-        <label>Имя</label>
-        <input type="text" placeholder="Ваше имя">
-        <label>Email</label>
-        <input type="email" placeholder="Ваш email">
-        <label>Сообщение</label>
-        <textarea placeholder="Ваше сообщение"></textarea>
-        <a href="#" class="button">Отправить</a>
-      </form>
-    </div>
   </div>
 
-  <!-- Английская версия -->
-  <div id="en" class="lang-block">
-    <h1>Hello! I'm Anton Tereshchuk</h1>
-    <div class="intro">
-      <p>I am an <span class="highlight">entry-level specialist</span> with experience in <span class="highlight">marketplaces</span> and <span class="highlight">communications</span>, striving to develop in <span class="highlight">content management</span> and <span class="highlight">recruitment</span>. Communicative, attentive to details, always ready to learn and tackle new tasks.</p>
-    </div>
+  <script>
+    // helper: show active block's sections with small stagger animation
+    function showActiveWithStagger() {
+      const activeBlock = document.querySelector('.lang-block.active');
+      if(!activeBlock) return;
+      const items = activeBlock.querySelectorAll('.intro, .section');
+      items.forEach((el, i) => {
+        el.classList.remove('visible');
+        setTimeout(()=> el.classList.add('visible'), 120 * i);
+      });
+    }
 
-    <div class="section">
-      <h2>Skills</h2>
-      <ul>
-        <li><span class="skill-icon">💻</span> Basic computer skills (MS Office, Google Docs)</li>
-        <li><span class="skill-icon">🗣</span> Ability to conduct professional conversations</li>
-        <li><span class="skill-icon">🔍</span> Effective research and analysis</li>
-        <li><span class="skill-icon">🌐</span> Languages: Ukrainian (native), Russian (fluent), English (learning)</li>
-        <li><span class="skill-icon">⚡</span> Responsibility, attention to detail, high motivation</li>
-      </ul>
-    </div>
+    function hideNonActive() {
+      document.querySelectorAll('.lang-block:not(.active) .intro, .lang-block:not(.active) .section')
+        .forEach(el => el.classList.remove('visible'));
+    }
 
-    <div class="section">
-      <h2>Education</h2>
-      <p><strong>College:</strong> Computer Science, 3rd year, externship-based (2022 — present)</p>
-      <p><strong>High School:</strong> 2013 — 2022</p>
-    </div>
+    function switchLang() {
+      const ru = document.getElementById('ru');
+      const en = document.getElementById('en');
+      ru.classList.toggle('active');
+      en.classList.toggle('active');
 
-    <div class="section">
-      <h2>Work Experience</h2>
-      <ul>
-        <li><span class="skill-icon">🛒</span><strong>Marketplace Content Manager (Ukraine)</strong>: Created product cards on Prom, Rozetka, Epicentr. Collected photos, serial numbers, specifications, designed attractive AI-enhanced images.</li>
-        <li><span class="skill-icon">🌐</span><strong>Content Manager / Agent (Facebook Marketplace, USA)</strong>: Communicated with clients on behalf of a construction company in Texas. Found clients and passed them to the manager for further negotiations via translator.</li>
-      </ul>
-    </div>
+      const btn = document.querySelector('.lang-switch');
+      btn.textContent = ru.classList.contains('active') ? "EN" : "RU";
 
-    <div class="section">
-      <h2>Contacts</h2>
-      <p>Phone: +420 777 264 569</p>
-      <p>Email: reqwirt0@gmail.com</p>
-      <p>Location: Karvina, Czech Republic</p>
-      <p>Available for remote work, flexible schedule, ready for new tasks.</p>
+      hideNonActive();
+      // small timeout so CSS display toggles first
+      setTimeout(showActiveWithStagger, 80);
+    }
 
-      <form>
-        <label>Name</label>
-        <input type="text" placeholder="Your Name">
-        <label>Email</label>
-        <input type="email" placeholder="Your Email">
-        <label>Message</label>
-        <textarea placeholder="Your Message"></textarea>
-        <a href="#" class="button">Send</a>
-      </form>
-    </div>
-  </div>
+    // IntersectionObserver for reveal on scroll (only for visible language block)
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
 
-</div>
+    document.addEventListener('DOMContentLoaded', () => {
+      // observe all intro/section elements (observer will trigger only visible ones)
+      document.querySelectorAll('.intro, .section').forEach(el => observer.observe(el));
+      // ensure initial active block animates
+      showActiveWithStagger();
 
-<script>
-  function switchLang() {
-    const ru = document.getElementById('ru');
-    const en = document.getElementById('en');
-    ru.classList.toggle('active');
-    en.classList.toggle('active');
-    const btn = document.querySelector('.lang-switch');
-    btn.textContent = ru.classList.contains('active') ? "EN" : "RU";
-
-    document.querySelectorAll('.lang-block.active .section, .lang-block.active .intro').forEach((el, idx) => {
-      setTimeout(() => { el.classList.add('visible'); }, idx * 150);
+      // ensure lang button reflects initial state
+      const btn = document.querySelector('.lang-switch');
+      const ru = document.getElementById('ru');
+      btn.textContent = ru.classList.contains('active') ? "EN" : "RU";
     });
-    document.querySelectorAll('.lang-block:not(.active) .section, .lang-block:not(.active) .intro').forEach(el => {
-      el.classList.remove('visible');
-    });
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting) { entry.target.classList.add('visible'); }
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.section, .intro').forEach(section => observer.observe(section));
-</script>
+  </script>
 </body>
 </html>
