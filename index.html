@@ -9,13 +9,13 @@
 :root{
   --page-bg: #f8f8f8;
   --text: #333333;
-  --accent: #6B4C3B;   
-  --accent-soft: #D2B48C; 
+  --accent: #6B4C3B;
+  --accent-soft: #D2B48C;
   --card-bg: #ffffff;
   --intro-bg: #FFFDF6;
 }
 
-*{box-sizing:border-box}
+*{box-sizing:border-box;}
 body{
   margin:0;
   font-family:'Poppins',system-ui,Segoe UI,Roboto,Arial,sans-serif;
@@ -53,13 +53,7 @@ body{
   box-shadow:0 10px 28px rgba(0,0,0,0.18);
 }
 
-h1{
-  text-align:center;
-  margin:0 0 10px 0;
-  font-size:28px;
-  color:var(--text);
-}
-
+h1{text-align:center;margin:0 0 10px 0;font-size:28px;color:var(--text);}
 .intro{
   background:var(--intro-bg);
   border-radius:16px;
@@ -181,7 +175,20 @@ input:focus, textarea:focus{
   li{ padding:8px 8px 8px 32px; }
   .button{ padding:10px 16px; border-radius:8px; }
 
-  /* Мобильная плавная подсветка только для .section */
+  /* Отключение hover на мобильных */
+  .section:hover{
+    transform: none;
+    box-shadow:0 8px 20px rgba(0,0,0,0.06);
+    background:var(--card-bg);
+  }
+  li:hover{
+    transform:none;
+    background:none;
+  }
+  li:hover .skill-icon{
+    transform:none;
+    color:var(--accent-soft);
+  }
   .section.active{
     background: rgba(107,76,59,0.12);
     box-shadow: 0 12px 28px rgba(0,0,0,0.12);
@@ -309,43 +316,43 @@ function switchLang() {
   const en = document.getElementById('en');
   ru.classList.toggle('active');
   en.classList.toggle('active');
-  const btn = document.querySelector('.lang-switch');
-  btn.textContent = ru.classList.contains('active') ? "EN" : "RU";
+  document.querySelector('.lang-switch').textContent = ru.classList.contains('active') ? "EN" : "RU";
 }
 
-// IntersectionObserver для появления блоков
+// Плавное появление блоков
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if(entry.isIntersecting) entry.target.classList.add('visible');
   });
 },{ threshold:0.12 });
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', ()=>{
   document.querySelectorAll('.intro, .section').forEach(el=>observer.observe(el));
-  const btn = document.querySelector('.lang-switch');
-  const ru = document.getElementById('ru');
-  btn.textContent = ru.classList.contains('active') ? "EN" : "RU";
 
-  // Мобильная плавная подсветка активного блока (только секции)
-  const mobileSections = document.querySelectorAll('.section'); 
+  // Мобильная подсветка только для секций
+  const mobileSections = document.querySelectorAll('.section');
   if(window.innerWidth <= 768){
     let timeout;
     const observerMobile = new IntersectionObserver(entries=>{
       clearTimeout(timeout);
       timeout = setTimeout(()=>{
-        let centerY = window.innerHeight / 2;
+        const centerY = window.innerHeight / 2;
         let closest = null;
         let minDist = Infinity;
         mobileSections.forEach(section => {
           const rect = section.getBoundingClientRect();
-          const sectionCenter = rect.top + rect.height /2;
+          const sectionCenter = rect.top + rect.height/2;
           const dist = Math.abs(centerY - sectionCenter);
-          if(dist < minDist){ minDist = dist; closest = section; }
+          if(dist < minDist){
+            minDist = dist;
+            closest = section;
+          }
         });
         mobileSections.forEach(s => s.classList.remove('active'));
         if(closest) closest.classList.add('active');
-      },50);
-    }, { threshold:0.5 });
+      }, 120); 
+    }, { threshold:0.55, rootMargin:"-10% 0px -10% 0px" });
+
     mobileSections.forEach(s => observerMobile.observe(s));
   }
 });
