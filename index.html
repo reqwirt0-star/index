@@ -7,12 +7,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --page-bg:#f8f8f8;
-  --text:#333333;
-  --accent:#6B4C3B;
-  --accent-soft:#D2B48C;
-  --card-bg:#ffffff;
-  --intro-bg:#FFFDF6;
+  --page-bg: #f8f8f8;
+  --text: #333333;
+  --accent: #6B4C3B;
+  --accent-soft: #D2B48C;
+  --card-bg: #ffffff;
+  --intro-bg: #FFFDF6;
 }
 
 /* Общие стили */
@@ -26,9 +26,9 @@ body{
   overflow-x:hidden;
 }
 
-/* --- Прелоадер --- */
-#preloader{
-  position:fixed;
+/* Прелоадер */
+#preloader {
+  position: fixed;
   top:0;
   left:0;
   width:100%;
@@ -40,34 +40,18 @@ body{
   z-index:2000;
   transition:opacity 0.5s ease;
 }
-#preloader.hide{opacity:0;pointer-events:none;}
-
+#preloader.hide{ opacity:0; pointer-events:none; }
 .spinner{
-  position:relative;
-  width:80px;
-  height:80px;
-  border-radius:50%;
-  border:6px solid rgba(107,76,59,0.2);
+  border:6px solid #f3f3f3;
   border-top:6px solid var(--accent);
+  border-radius:50%;
+  width:60px;
+  height:60px;
   animation:spin 1s linear infinite;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:700;
-  color:var(--accent);
-  font-size:24px;
-}
-.spinner span{
-  position:absolute;
-  animation: pulse 1.2s ease-in-out infinite;
 }
 @keyframes spin{
   0%{transform:rotate(0deg);}
   100%{transform:rotate(360deg);}
-}
-@keyframes pulse{
-  0%,100%{transform:scale(1);}
-  50%{transform:scale(1.3);}
 }
 
 /* Контейнер */
@@ -76,13 +60,6 @@ body{
   margin:34px auto;
   padding:22px;
   position:relative;
-  opacity:0;
-  transform:translateY(12px);
-  transition:opacity 1s ease, transform 1s ease;
-}
-.container.visible{
-  opacity:1;
-  transform:translateY(0);
 }
 
 /* Кнопка смены языка */
@@ -93,7 +70,7 @@ body{
   z-index:1200;
   background-color:var(--accent);
   color:#fff;
-  border:none;
+  border: none;
   border-radius:10px;
   padding:10px 16px;
   font-weight:600;
@@ -154,7 +131,6 @@ h2{
   font-size:18px;
 }
 
-/* Список навыков */
 ul{ list-style:none; padding-left:0; margin:0; }
 li{
   padding:10px 12px 10px 34px;
@@ -178,7 +154,6 @@ li:hover{ transform:translateX(6px); background:rgba(210,180,140,0.08); }
 .skill-icon{ margin-right:8px; display:inline-block; color:var(--accent-soft); transition:transform .22s ease, color .22s ease; }
 li:hover .skill-icon{ transform:scale(1.18) rotate(6deg); color:var(--accent); }
 
-/* Формы */
 form label{ display:block; margin-top:10px; font-weight:600; color:var(--text); }
 input, textarea{
   width:100%;
@@ -265,11 +240,8 @@ input:focus, textarea:focus{
 </style>
 </head>
 <body>
-
 <!-- Прелоадер -->
-<div id="preloader">
-  <div class="spinner"><span>AT</span></div>
-</div>
+<div id="preloader"><div class="spinner"></div></div>
 
 <div class="container">
   <button class="lang-switch" onclick="switchLang()">EN</button>
@@ -284,26 +256,27 @@ input:focus, textarea:focus{
     <div class="section">
       <h2>Навыки и инструменты</h2>
       <ul>
-        <li><span class="skill-icon">🛒</span>Работа с маркетплейсами: создание карточек товаров, подбор фото, спецификации, оформление</li>
-        <li><span class="skill-icon">🤖</span>Работа с AI-ассистентами: генерация визуального контента</li>
-        <li><span class="skill-icon">💻</span>GitHub: управление кодом, деплой проектов</li>
-        <li><span class="skill-icon">📄</span>Google Docs, MS Office</li>
-        <li><span class="skill-icon">🔍</span>Аналитика и поиск информации</li>
+        <li>Работа с маркетплейсами: создание карточек товаров, подбор фото, спецификации, оформление</li>
+        <li>Работа с AI-ассистентами: генерация визуального контента</li>
+        <li>GitHub: управление кодом, деплой проектов</li>
+        <li>Google Docs, MS Office</li>
+        <li>Аналитика и поиск информации</li>
       </ul>
     </div>
 
     <div class="section">
       <h2>Опыт работы</h2>
       <ul>
-        <li><span class="skill-icon">🛒</span><strong>Контент-менеджер маркетплейса (Украина)</strong>: создавал карточки товаров с нуля: фото, серийные номера, спецификации. Генерировал визуальные материалы с помощью AI для улучшения оформления. Оптимизировал платформу для повышения удобства и привлекательности контента.</li>
-        <li><span class="skill-icon">🌐</span><strong>Контент-менеджер / агент (Facebook Marketplace, США)</strong>: поиск клиентов для строительной компании в Техасе. Ведение переписки через переводчик и передача лидов менеджеру. Эффективное взаимодействие с клиентами и командой.</li>
+        <li><strong>Контент-менеджер маркетплейса (Украина)</strong>: создавал карточки товаров с нуля: фото, серийные номера, спецификации. Генерировал визуальные материалы с помощью AI для улучшения оформления. Оптимизировал платформу для повышения удобства и привлекательности контента.</li>
+        <li><strong>Контент-менеджер / агент (Facebook Marketplace, США)</strong>: поиск клиентов для строительной компании в Техасе. Ведение переписки через переводчик и передача лидов менеджеру. Эффективное взаимодействие с клиентами и командой.</li>
       </ul>
     </div>
 
     <div class="section">
       <h2>Образование</h2>
       <p><strong>High School:</strong> завершил среднее образование (9 лет) (2013 – 2022)</p>
-      <p><strong>College:</strong> Computer Science, 3-й год (образование с частичной внешней практикой / дистанционно, экстерн) (2022 – настоящее время). Учеба полностью экстернатная: занятия проходят дистанционно, полностью гибкий график. Образование не мешает работе на полный рабочий день (8 часов), позволяет совмещать с профессиональной деятельностью.</p>
+      <p><strong>College:</strong> специализация: Computer Science, 3-й год (образование с частичной внешней практикой / дистанционно, экстерн) (2022 – настоящее время)</p>
+      <p>Учеба полностью экстернатная: занятия проходят дистанционно, полностью гибкий график. Образование не мешает работе на полный рабочий день (8 часов), позволяет совмещать с профессиональной деятельностью.</p>
     </div>
 
     <div class="section">
@@ -344,47 +317,48 @@ input:focus, textarea:focus{
   <div id="en" class="lang-block">
     <h1>Hello! I'm Anton Tereshchuk</h1>
     <div class="intro">
-      I am an <span class="highlight">entry-level specialist</span> with experience in <span class="highlight">marketplaces</span> and <span class="highlight">communications</span>. I aim to grow in <span class="highlight">content management</span>, <span class="highlight">recruitment</span> and <span class="highlight">project management</span>. Communicative, detail-oriented, fast learner, and love working with new people and non-standard tasks.
+      I am an <span class="highlight">entry-level specialist</span> with experience in <span class="highlight">marketplaces</span> and <span class="highlight">communications</span>. I aim to grow in <span class="highlight">content management</span>, <span class="highlight">recruitment</span> and <span class="highlight">project management</span>. Communicative, detail-oriented, quick to learn and love working with new people and challenging tasks.
     </div>
 
     <div class="section">
       <h2>Skills & Tools</h2>
       <ul>
-        <li><span class="skill-icon">🛒</span>Marketplaces: creating product cards, photo selection, specifications, design</li>
-        <li><span class="skill-icon">🤖</span>AI assistants: visual content generation</li>
-        <li><span class="skill-icon">💻</span>GitHub: code management, project deployment</li>
-        <li><span class="skill-icon">📄</span>Google Docs, MS Office</li>
-        <li><span class="skill-icon">🔍</span>Analytics and information research</li>
+        <li>Marketplaces: creating product cards, selecting photos, specs, design</li>
+        <li>AI Assistants: generating visual content</li>
+        <li>GitHub: code management, project deployment</li>
+        <li>Google Docs, MS Office</li>
+        <li>Research and analytical skills</li>
       </ul>
     </div>
 
     <div class="section">
       <h2>Work Experience</h2>
       <ul>
-        <li><span class="skill-icon">🛒</span><strong>Marketplace Content Manager (Ukraine)</strong>: created product cards from scratch: photos, serial numbers, specifications. Generated AI visuals to enhance listings. Optimized platform for usability and content attractiveness.</li>
-        <li><span class="skill-icon">🌐</span><strong>Content Manager / Agent (Facebook Marketplace, USA)</strong>: searched clients for a Texas construction company. Managed chats via translator and passed leads to manager. Effective client and team interaction.</li>
+        <li><strong>Marketplace Content Manager (Ukraine)</strong>: created product cards from scratch: photos, serial numbers, specifications. Generated AI visuals to enhance content. Optimized platform usability and presentation.</li>
+        <li><strong>Content Manager / Agent (Facebook Marketplace, USA)</strong>: client sourcing for a Texas construction company. Handled communication via translator and passed leads to the manager. Effective client and team interaction.</li>
       </ul>
     </div>
 
     <div class="section">
       <h2>Education</h2>
       <p><strong>High School:</strong> completed secondary education (9 years) (2013 – 2022)</p>
-      <p><strong>College:</strong> Computer Science, 3rd year (externship / distance learning) (2022 – present). Fully remote study with flexible schedule. Education does not interfere with full-time work (8 hours) and can be combined with professional activities.</p>
+      <p><strong>College:</strong> Computer Science, 3rd year (partial externship / remote, 2022 – present)</p>
+      <p>Fully remote education, flexible schedule. Does not interfere with full-time work (8h), can be combined with professional activity.</p>
     </div>
 
     <div class="section">
-      <h2>Soft Skills</h2>
+      <h2>Soft Skills / Personal Qualities</h2>
       <ul>
-        <li>Communication and interpersonal skills</li>
+        <li>Communicative, able to interact with different people</li>
         <li>Time management and organization</li>
-        <li>Fast learning and adaptation to new tasks</li>
+        <li>Quick learning and adaptation to new tasks</li>
         <li>Proactivity and responsibility</li>
       </ul>
     </div>
 
     <div class="section">
       <h2>Career Goals</h2>
-      <p>Starting as a sourcer/researcher or content manager, aiming to grow into project management. Continuously learning new skills and tools, ready for professional growth.</p>
+      <p>Starting from sourcer/researcher or content manager positions, aiming to move into project management. Always learning new skills and tools, ready for professional growth.</p>
     </div>
 
     <div class="section">
@@ -416,13 +390,6 @@ function switchLang() {
   document.querySelector('.lang-switch').textContent = ru.classList.contains('active') ? "EN" : "RU";
 }
 
-// Прелоадер
-window.addEventListener('load', ()=>{
-  const preloader = document.getElementById('preloader');
-  preloader.classList.add('hide');
-  setTimeout(()=>{ document.querySelector('.container').classList.add('visible'); },500);
-});
-
 // Плавное появление блоков
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
@@ -431,6 +398,10 @@ const observer = new IntersectionObserver(entries => {
 },{ threshold:0.12 });
 
 document.addEventListener('DOMContentLoaded', ()=>{
+  // Прелоадер
+  const preloader = document.getElementById('preloader');
+  setTimeout(()=>{ preloader.classList.add('hide'); }, 1200);
+
   document.querySelectorAll('.intro, .section').forEach(el=>observer.observe(el));
 
   // Мобильная подсветка только для секций
@@ -447,10 +418,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
           const rect = section.getBoundingClientRect();
           const sectionCenter = rect.top + rect.height/2;
           const dist = Math.abs(centerY - sectionCenter);
-          if(dist < minDist){
-            minDist = dist;
-            closest = section;
-          }
+          if(dist < minDist){ minDist = dist; closest = section; }
         });
         mobileSections.forEach(s => s.classList.remove('active'));
         if(closest) closest.classList.add('active');
